@@ -1,0 +1,16 @@
+#!/bin/bash
+
+BASEDIR="/home/of/scanner"
+
+EMAIL_CONTACT_ORG="YOURORG"
+EMAIL_CONTACT_INFO="$EMAIL_CONTACT_ORG (mailto:info@your.org or +123 45 678)"
+EMAIL_SUBJECT_PREFIX="[$EMAIL_CONTACT_ORG NOTIFICATION]"
+EMAIL_SUBJECT_INITIAL="Initial network scan results for"
+EMAIL_SUBJECT_CHANGE="Network change detected for"
+EMAIL_HEADER_INITIAL="This email contains information regarding the initial network port scan performed by $EMAIL_CONTACT_ORG."
+EMAIL_HEADER_CHANGE="This email contains information regarding a subsequent network port scan performed by $EMAIL_CONTACT_ORG, which discovered a network change."
+EMAIL_BODY_INITIAL="Hereafter the result of the initial scan of"
+EMAIL_BODY_CHANGE="Hereafter the result of the scan and the changes (additional open ports or new hosts indicated by a plus ('+') sign, closed ports indicated by a minus ('-') sign) regarding the network"
+EMAIL_FOOTER_INITIAL="Should you discover any unexpected results (e.g. unexpected open ports, wrong IP range), or in case you need support to interpret the results, don't hesitate to get back to us."
+EMAIL_FOOTER_CHANGE="If this network change was unexpected, please review what caused the change and react accordingly. Should you need support to interpret the results or in case you have difficulties to find a good resolution, please get in touch with $EMAIL_CONTACT_ORG immediately."
+EMAIL_INFO="\nYou receiced this message because you or someone from your organization subscribed you for this service.\nShould you have any question, please get in touch with $EMAIL_CONTACT_INFO.\n$EMAIL_CONTACT_ORG uses Free and Open Source Software to realize this service, mainly GNU/Linux and Nmap [https://nmap.org]\n"
