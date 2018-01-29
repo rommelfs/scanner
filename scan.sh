@@ -6,7 +6,7 @@
 
 # In case GNU parallel is supposed to be used, to the following:
 # Create a "targets" file, format: [IP] [EMAIL] [NMAP OPTIONS]
-# On command line, do: cat targets | parallel -r {}
+# On command line, do: cat targets |parallel ./scan.sh -r {}
 
 # For use with a targets file
 if [[ "$1" == "-r" ]]
