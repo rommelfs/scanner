@@ -3,11 +3,29 @@
 # Import configuration
 . scan.conf
 
-TARGET="$1"
-EMAIL="$2"
+
+# In case GNU parallel is supposed to be used, to the following:
+# Create a "targets" file, format: [IP] [EMAIL] [NMAP OPTIONS]
+# On command line, do: cat targets | parallel -r {}
+
+# For use with a targets file
+if [[ "$1" == "-r" ]]
+then
+        args=($2)
+        TARGET=${args[0]}
+        EMAIL=${args[1]}
+        NMAP_OPTIONS=${args[@]:2:99}
+else
+# For use with command line arguments
+        TARGET="$1"
+        EMAIL="$2"
+        shift; shift
+        NMAP_OPTIONS="$@"
+fi
+
 INITIAL=false
-shift; shift
-NMAP_OPTIONS="$@"
+
+# Check if we have custom Nmap options
 if [ -z "$NMAP_OPTIONS" ]
 then
         NMAP_OPTIONS="$NMAP_DEFAULT_OPTIONS"
