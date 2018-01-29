@@ -35,16 +35,16 @@ fi
 echo $TARGET | egrep '^[0-9]{1,3}(\.[0-9]{1,3}){3}\/[0-9]{1,2}$'
 if [ $? -gt 0 ]
 then
-	echo "$TARGET is not a valid IP address including a netmask (like 127.0.0.1/32)."
-	exit 1
+	    echo "$TARGET is not a valid IP address including a netmask (like 127.0.0.1/32)."
+	    exit 1
 fi
 
 # Check if the email is given
 echo $EMAIL | egrep '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}'
 if [ $? -gt 0 ]
 then
-	echo "$EMAIL doesn't seem to be a valid email address."
-	exit 1
+	    echo "$EMAIL doesn't seem to be a valid email address."
+	    exit 1
 fi
 
 mkdir -p "$BASEDIR/scans/$TARGET/$DIR_NEW"
