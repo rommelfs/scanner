@@ -13,6 +13,11 @@ if [[ "$1" == "-r" ]]
 then
         args=($2)
         TARGET=${args[0]}
+        if [[ "$TARGET" == "#" ]]
+        then
+                echo "ignoring comment"
+                exit 0
+        fi
         EMAIL=${args[1]}
         NMAP_OPTIONS=${args[@]:2:99}
 else
