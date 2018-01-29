@@ -54,7 +54,7 @@ if [ $INITIAL == true  ]
 then
 	$NMAP_BIN $NMAP_OPTIONS $TARGET -oX $FILENAME_NEW -oN $FILENAME_NEW.txt
         #cat $FILENAME_NEW.txt | mail -s "$EMAIL_SUBJECT_PREFIX $EMAIL_SUBJECT_INITIAL $TARGET" $EMAIL
-        printf "$EMAIL_HEADER_INITIAL\n$EMAIL_BODY_INITIAL $TARGET:\n`cat $FILENAME_NEW.txt|grep -v 'scan initiated' | grep -v 'Starting Nmap'|grep -v 'Nmap done'`\n\n$EMAIL_FOOTER_INITIAL\n$EMAIL_INFO" | \
+        printf "$EMAIL_HEADER_INITIAL\n$EMAIL_BODY_INITIAL $TARGET:\n`cat $FILENAME_NEW.txt|sed -e 's/Nmap scan/Scan/'| grep -v 'scan initiated' | grep -v 'Starting Nmap'|grep -v 'Nmap done'`\n\n$EMAIL_FOOTER_INITIAL\n$EMAIL_INFO" | \
                 mail -s "$EMAIL_SUBJECT_PREFIX $EMAIL_SUBJECT_INITIAL $TARGET" $EMAIL
         logger "Sent mail to $EMAIL: Initial network scan for $TARGET. See file $FILENAME_NEW for details"
 	rm $FILENAME_NEW.txt
