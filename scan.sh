@@ -1,8 +1,13 @@
 #!/bin/bash
 
+## nmap/ndiff based scanner with template based notification 
+## system in case of infrastructure changes
+##
+## Copyright: Sascha Rommelfangen, CIRCL, Smile g.i.e, 2018-01-31
+## GNU General Public License v2.0
+
 # Import configuration
 . scan.conf
-
 
 # In case GNU parallel is supposed to be used, to the following:
 # Create a "targets" file, format: [IP] [EMAIL] [NMAP OPTIONS]
