@@ -52,6 +52,8 @@ then
 	    exit 1
 fi
 
+logger -i --id=$$ -t scanner "Scan requested for $TARGET"
+
 mkdir -p "$BASEDIR/scans/$TARGET/$DIR_NEW"
 mkdir -p "$BASEDIR/scans/$TARGET/$DIR_OLD"
 mkdir -p "$BASEDIR/scans/$TARGET/$DIR_ARCHIVE"
@@ -75,15 +77,19 @@ fi
 # perform scan
 if [ $INITIAL == true  ]
 then
-	$NMAP_BIN $NMAP_OPTIONS $TARGET -oX $FILENAME_NEW -oN $FILENAME_NEW.txt
+	logger -i --id=$$ -t scanner "Starting initial scan for $TARGET"
+	sudo $NMAP_BIN $NMAP_OPTIONS $TARGET -oX $FILENAME_NEW -oN $FILENAME_NEW.txt
         #cat $FILENAME_NEW.txt | mail -s "$EMAIL_SUBJECT_PREFIX $EMAIL_SUBJECT_INITIAL $TARGET" $EMAIL
+	logger -i --id=$$ -t scanner "Scan for $TARGET finished"
         printf "$EMAIL_HEADER_INITIAL\n$EMAIL_BODY_INITIAL $TARGET:\n`cat $FILENAME_NEW.txt|sed -e 's/Nmap scan/Scan/'| grep -v 'scan initiated' | grep -v 'Starting Nmap'|grep -v 'Nmap done'`\n\n$EMAIL_FOOTER_INITIAL\n$EMAIL_INFO" | \
                 mail -s "$EMAIL_SUBJECT_PREFIX $EMAIL_SUBJECT_INITIAL $TARGET" $EMAIL
-        logger "Sent mail to $EMAIL: Initial network scan for $TARGET. See file $FILENAME_NEW for details"
+        logger -i --id=$$ -t scanner "Sent mail to $EMAIL: Initial network scan for $TARGET. See file $FILENAME_NEW for details"
 	rm $FILENAME_NEW.txt
         exit 0
 else
-	$NMAP_BIN $NMAP_OPTIONS $TARGET -oX $FILENAME_NEW
+	logger -i --id=$$ -t scanner "Starting successive scan for $TARGET"
+	sudo $NMAP_BIN $NMAP_OPTIONS $TARGET -oX $FILENAME_NEW
+	logger -i --id=$$ -t scanner "Scan for $TARGET finished"
 fi
 
 # test if we have two files to compare
@@ -99,9 +105,10 @@ then
                 rm $FILENAME_DIFF.mail
                 FILENAME_DIFF_ARCHIVE=$DIRECTORY_ARCHIVE/diff-`date "+%Y%m%d-%s"`
                 mv $FILENAME_DIFF $FILENAME_DIFF_ARCHIVE
-                logger "Sent mail to $EMAIL: network change detected for $TARGET. See file $FILENAME_DIFF_ARCHIVE for details"
+                logger -i --id=$$ -t scanner "Sent mail to $EMAIL: network change detected for $TARGET. See file $FILENAME_DIFF_ARCHIVE for details"
         else
-                logger "No change detected for target $TARGET"
+                logger -i --id=$$ -t scanner "No change detected for target $TARGET"
         fi
 fi
+logger -i --id=$$ -t scanner "Scan job for $TARGET finished"
 exit 0
