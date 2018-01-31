@@ -24,7 +24,7 @@ Copy the config file `scan.conf-example` to `scan.conf` and edit it accordingy y
 `./scan.sh [IP]/[CIDR] [Email address]` 
 
 ### Running through parallels
-Create a file called `targets` (see `targets-example` to get an idea) and define your targets, notification addresses and `nmap` options there.
+Create a file called `targets` (see `targets-example` to get an idea) and define your targets, notification addresses and `nmap` options there. When reading from a file, `-r` needs to be specified to deal with the special condition.
 `cat targets |parallel -j 4 ./scan.sh -r {}`
 
 You can tune the number of parallel tasks with the '-j n' parameter.
