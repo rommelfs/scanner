@@ -29,6 +29,18 @@ Create a file called `targets` (see `targets-example` to get an idea) and define
 
 You can tune the number of parallel tasks with the '-j n' parameter.
 
+## Sample output
+```
+This email contains information regarding a subsequent network port scan performed by ORG, which discovered a network change.
+Hereafter the result of the scan and the changes (additional open ports or new hosts indicated by a plus ('+') sign, closed ports indicated by a minus ('-') sign) regarding the network 127.0.0.1/32:
+PORT    STATE         SERVICE VERSION
+22/tcp  open          ssh
+25/tcp  open          smtp
++23/tcp  open          Telnet
+
+If this network change was unexpected, please review what caused the change and react accordingly. 
+```
+
 ## Copyright
 Copyright: Sascha Rommelfangen, CIRCL, Smile g.i.e, 2018-01-31
 
