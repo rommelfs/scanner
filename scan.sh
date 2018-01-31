@@ -24,7 +24,7 @@ else
 # For use with command line arguments
         TARGET="$1"
         EMAIL="$2"
-        shift; shift
+        shift 2
         NMAP_OPTIONS="$@"
 fi
 
