@@ -11,6 +11,7 @@ In case a network change is detected, the difference is sent in a (templated) ma
 git pull this repository at a location of your choice. Make sure `nmap` and `ndiff` are installed. 
 Sending emails should be working from command line using the `mail` command. `logger` is being used for logging.
 The user running the script should be in the sudoers file, especially for running `nmap`:
+
 `username        ALL=NOPASSWD: /usr/bin/nmap`
 
 ## Configuration
@@ -25,6 +26,7 @@ Copy the config file `scan.conf-example` to `scan.conf` and edit it accordingy y
 
 ### Running through parallels
 Create a file called `targets` (see `targets-example` to get an idea) and define your targets, notification addresses and `nmap` options there. When reading from a file, `-r` needs to be specified to deal with the special condition.
+
 `cat targets |parallel -j 4 ./scan.sh -r {}`
 
 You can tune the number of parallel tasks with the '-j n' parameter.
